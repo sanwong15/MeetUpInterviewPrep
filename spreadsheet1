@@ -1,0 +1,103 @@
+import java.util.Arrays;
+import java.util.Scanner;
+
+public class spreadSheet {
+	
+	public static int[] columnSize;
+	public static int[] cumColumnSize;
+	public static int numberOfColumn;
+	public static int columnIndex;
+
+	public static void main(String[] args) {
+		// Part 1. Assume Given array [8,2,10,10]
+		System.out.println("Please enter the length columnSize");
+		Scanner sc = new Scanner(System.in);
+		
+		numberOfColumn = sc.nextInt();
+		columnSize = new int[numberOfColumn];
+		cumColumnSize = new int[numberOfColumn];
+		
+		
+		
+		//Getting the array from user
+		for (int i=0; i<numberOfColumn; i++){
+			System.out.println("Please enter the element of the columnSize array");
+			columnSize[i] = sc.nextInt();
+		}//End of For Loop
+		
+	// Generate the cumulative array
+	for (int i=0; i<numberOfColumn; i++){
+		if(i==0){
+			cumColumnSize[0] = columnSize[0];
+		}else{
+			cumColumnSize[i] = cumColumnSize[i-1] + columnSize[i];
+		}
+	}
+
+	Display();
+	DisplayCum();
+	System.out.println("Return column number: "+Click());
+	
+	Resize();
+	Display();
+	DisplayCum();
+
+	}// End of Main
+
+	//Click(x) method. Return column number/index. It tells you which column you are in currently
+	public static int Click(){
+		System.out.println("Please enter Click pixel argument");
+		Scanner sc = new Scanner(System.in);
+		int x = sc.nextInt();
+		
+		for (int i=0; i<numberOfColumn; i++){
+			if (x<=cumColumnSize[i]){
+				columnIndex = i+1;
+				break;
+			} else if (x<0 || x>cumColumnSize[numberOfColumn-1]){
+				System.out.println("The argumet is out of bound");
+				return -1;
+			}
+			
+		}// End of For Loop
+		return columnIndex;
+	}// End of Click()
+	
+	//Resize(index,newWidth)
+	public static void Resize(){
+		Scanner sc = new Scanner(System.in);
+		System.out.println("Please enter which column you would like to modifly");
+		int index = sc.nextInt();
+		System.out.println("Please enter the newWidth");
+		int newWidth = sc.nextInt();
+		//Find the size difference with the newWidth
+		int difference = newWidth - columnSize[index-1];
+		System.out.println("The difference in width is: " + difference);
+		//Update columnSize array
+		// Reason to have index-1 since people usually call the zero index as First column. Only programmer call it zero index
+		columnSize[index-1] = newWidth;
+		//Update cumColumnSize array
+		for (int i =index-1; i<numberOfColumn; i++){
+			cumColumnSize[i] += difference;
+		}
+	}
+	
+	//Display most updated columnSize array
+	public static void Display(){
+		System.out.println("Updated columnSize array: ");
+		for (int i=0; i<numberOfColumn; i++){
+			System.out.print(columnSize[i]+ " ");
+		}
+		System.out.println();
+	}// End of Display
+	
+	//Display cumColum
+	public static void DisplayCum(){
+		System.out.println("Updated cumColumnSize array: ");
+		for (int i=0; i<numberOfColumn; i++){
+			System.out.print(cumColumnSize[i]+" ");
+		}
+		System.out.println();
+	}// End of cumDisplay
+	
+}// End of class
