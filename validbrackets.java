@@ -1,3 +1,8 @@
+/*
+San Wong
+hswong1@uci.edu
+*/
+
 import java.util.Stack;
 
 public class validbrackets {
@@ -19,7 +24,7 @@ public class validbrackets {
 		int len = s.length();
 		Stack<Character> st = new Stack<>();
 		
-		String caseString = "";
+		
 		for(int i=0; i<len; i++){
 			char current = s.charAt(i);
 			switch(current){

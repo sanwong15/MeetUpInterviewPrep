@@ -1,3 +1,7 @@
+/*
+San Wong
+hswong1@uci.edu
+*/
 
 public class SubArraySumMatch {
 
