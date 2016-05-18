@@ -1,7 +1,10 @@
+import java.util.HashMap;
+
 /*
 San Wong
 hswong1@uci.edu
 */
+
 
 public class SubArraySumMatch {
 
@@ -75,7 +78,7 @@ public class SubArraySumMatch {
 		System.out.println("With SlidingWindow approach: " + slidingWindow(b,10));
 		System.out.println();
 		System.out.println("My Sliding Window approach won't work on array with negative number because when 'tempSum > T', I increment index i. This act neglect the posibility of having a negative number in the array that can balance the surplus" );
-
+		System.out.println("With ultimate (HashMap) approach: " + ultimateMethod(b,10));
 
 	}
 	
@@ -178,6 +181,22 @@ public class SubArraySumMatch {
 	public static int ultimateMethod(int[] a, int T){
 		int count=0;
 		
+		int[] cumSum = new int[a.length+1];
+		cumSum[0] = 0;
+		for (int k =1; k<cumSum.length; k++){
+			cumSum[k] = cumSum[k-1] + a[k-1];
+		}
+		//key: value in the cumSum array ; Value: is its count
+		HashMap<Integer, Integer> map = new HashMap<Integer,Integer>();
+		
+		for (int e: cumSum){
+			int difference = e-T;
+			if (map.containsKey(difference)){
+				count += map.get(difference);
+			}
+			
+			map.put(e,1);
+		}
 		
 		return count;
 	}
