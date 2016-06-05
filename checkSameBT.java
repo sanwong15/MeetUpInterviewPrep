@@ -52,15 +52,35 @@ public class checkSameBT {
 		
 		System.out.println("Is A and A2 tree the same? " + isSame(A,A2));
 
+		LetterTreeNode A3 = new LetterTreeNode('a');
+		LetterTreeNode B3 = new LetterTreeNode('b');
+		LetterTreeNode C3 = new LetterTreeNode('c');
+		LetterTreeNode D3 = new LetterTreeNode('d');
+		LetterTreeNode E3 = new LetterTreeNode('e');
+		LetterTreeNode F3 = new LetterTreeNode('f');
+		LetterTreeNode G3 = new LetterTreeNode('g');
+		LetterTreeNode H3 = new LetterTreeNode('h');
+		
+		A3.left = B3;
+		A3.right = C3;
+		B3.left = D3;
+		B3.right = E3;
+		C3.left = F3;
+		C3.right = G3;
+		D3.left = H3;
+		
+		System.out.println("Is A and A3 tree the same? " + isSame(A,A3));
 	}
 	
 	public static boolean isSame(LetterTreeNode a, LetterTreeNode b){
-		if (a == null && b == null) return true;
-		
-		if (a.data != b.data) return false;
-		
-		return (isSame(a.left, b.left) && isSame(a.right, b.right));
-		
+		if (a == null && b == null){
+			return true;
+		}
+			
+		if(a != null && b != null){
+			return (a.data == b.data && isSame(a.left, b.left) && isSame(a.right, b.right));
+		}
+			return false;
 	}
 
 }
